@@ -1,1 +1,1 @@
-# Social Media API built using Python and FastAPI.
+# Python - Social Media API
