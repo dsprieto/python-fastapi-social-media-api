@@ -1,2 +1,1 @@
-# python-fastapi-social-media-api
-# python-fastapi-social-media-api
+# Social Media API built using Python and FastAPI.
