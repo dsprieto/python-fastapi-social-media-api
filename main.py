@@ -53,7 +53,7 @@ def create_post(post: Post):
     post_to_dict = {"id": post_id, **post_to_dict}
     my_posts.append(post_to_dict)
     post_id += 1
-    return {"data": f"Successfully added post: {post_to_dict}"}
+    return {"success": post_to_dict}
 
 
 # Get a post by id
@@ -61,23 +61,23 @@ def create_post(post: Post):
 def get_post(id: int, response: Response):
     post: dict = get_post_by_id(my_posts, id)
     if post is None:
-        return JSONResponse(content={"message": "Post not found"}, status_code=status.HTTP_404_NOT_FOUND)
-    return {f"data": post}
+        return JSONResponse(content={"error": "post not found"}, status_code=status.HTTP_404_NOT_FOUND)
+    return {"data": post}
 
 
 # Get all posts
 @app.get("/posts")
 def get_all_posts():
-    return {f"data": f"{my_posts}"}
+    return {"data": my_posts}
 
 
 # Update post by id
 @app.put("/posts/{id}")
 def update_post(id: int):
-    return {f"data": f"Successfully updated post with id: {id}"}
+    return {"success": id}
 
 
 # Delete post by id
 @app.delete("/posts/{id}")
 def delete_post(id: int):
-    return {f"data": f"Successfully deleted post with id: {id}"}
+    return {"success": id}
