@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Response, status, HTTPException
+from fastapi import FastAPI, status, HTTPException
 from pydantic import BaseModel, field_validator
 from typing import Optional, List, Dict
 
@@ -45,7 +45,7 @@ def root():
 
 
 # Create a post
-@app.post("/posts")
+@app.post("/posts", status_code=status.HTTP_201_CREATED)
 def create_post(post: Post):
     global post_id
     post_to_dict = post.model_dump()
