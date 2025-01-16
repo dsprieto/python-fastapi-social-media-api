@@ -1,5 +1,4 @@
-from fastapi import FastAPI, Response, status
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, Response, status, HTTPException
 from pydantic import BaseModel, field_validator
 from typing import Optional, List, Dict
 
@@ -58,10 +57,10 @@ def create_post(post: Post):
 
 # Get a post by id
 @app.get("/posts/{id}")
-def get_post(id: int, response: Response):
+def get_post(id: int):
     post: dict = get_post_by_id(my_posts, id)
     if post is None:
-        return JSONResponse(content={"error": "post not found"}, status_code=status.HTTP_404_NOT_FOUND)
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"error": "post not found"})
     return {"data": post}
 
 
